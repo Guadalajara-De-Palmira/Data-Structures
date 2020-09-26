@@ -1,0 +1,110 @@
+package model;
+
+public class HashTable<K,E> implements IHashTable<K, E> {
+
+	private Element<K,E>[] elements;
+	private int length;
+	
+	@SuppressWarnings("unchecked")
+	public HashTable(int maxLength) {
+		elements = new Element[maxLength];
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public void tableInsert(E element) {
+		boolean inserted = false;
+		
+		for(int i=0; i<elements.length && !inserted;i++) {
+			int index = (this.hashFunction(element.hashCode())+i)%elements.length;
+			
+			if(elements[index]==null) {
+				
+				elements[index] = new Element(element.hashCode(),element);
+				inserted = true;
+				
+			}else if((int)elements[index].getKey()==-1 && elements[index].getElement()==null) {
+				
+				elements[index] = new Element(element.hashCode(),element);
+				inserted = true;	
+			}
+		}
+		if(!inserted) {
+			//tiene que tirar una excepcion de que la tabla esta llena
+		}
+		length++;
+	}
+
+	@Override
+	public E tableRetrieve(K key) {
+		boolean found = false;
+		Element element = null;
+		
+		for(int i=0; i<elements.length && !found;i++) {
+			int index = (this.hashFunction(key.hashCode())+i)%elements.length;
+			
+			if(elements[index]==null) {
+				//tira excepcion de que no se encontro el elemento
+				
+			}else if((int)elements[index].getKey()==key.hashCode()) {
+				found = true;
+				element = elements[index];
+
+			}
+		}
+		
+		if(!found) {
+			//tira excepcion de que no se encontro el elemento a borrar
+		}
+		return (E) element.getElement();
+	}
+
+	@Override
+	public E tableDelete(K key) {
+		boolean found = false;
+		Element element = null;
+		
+		for(int i=0; i<elements.length && !found;i++) {
+			int index = (this.hashFunction(key.hashCode())+i)%elements.length;
+			
+			if(elements[index]==null) {
+				//tira excepcion de que no se encontro el elemento a borrar
+				
+			}else if((int)elements[index].getKey()==key.hashCode()) {
+				found = true;
+				element = elements[index];
+				elements[index] = new Element(-1,null);
+				length--;
+
+			}
+		}
+		
+		if(!found) {
+			//tira excepcion de que no se encontro el elemento a borrar
+		}
+
+		return (E) element.getElement();
+	}
+
+	@Override
+	public boolean isEmpty() {
+		boolean empty = false;
+		
+		if(length==0) {
+			empty = true;
+		}
+		
+		return empty;
+	}
+
+	@Override
+	public int tableLength() {
+		return length;
+	}
+
+	@Override
+	public int hashFunction(int key) {
+		return key%elements.length;
+	}
+
+}
