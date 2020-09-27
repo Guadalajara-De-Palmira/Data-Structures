@@ -3,7 +3,7 @@ package model;
 public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T>{
 
 	private Component[] elements;
-	int heapSize;
+	private int heapSize;
 	
 	public MaxHeap(int maxSize) {
 		elements = new Component[maxSize];
@@ -105,6 +105,10 @@ public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T>{
 			i = parent(i);
 			comparation = elements[parent(i)].getElement().compareTo(elements[i].getElement());
 		}
+	}
+	
+	public int getHeapSize () {
+		return heapSize;
 	}
 
 }
