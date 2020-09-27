@@ -10,6 +10,14 @@ public interface IMaxHeap<T extends Comparable<T>>{
 	
 	public T extract();
 	
-	public T show();
+	public T returnMaximum();
+	
+	public int parent(int i);
+	
+	public int left(int i);
+	
+	public int right(int i);
+	
+	public void increaseKey(int i,T key);
 	
 }
