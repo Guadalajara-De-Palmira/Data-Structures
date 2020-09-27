@@ -107,4 +107,10 @@ public class HashTable<K,E> implements IHashTable<K, E> {
 		return key%elements.length;
 	}
 
+	@Override
+	public Element<K, E>[] getTable() {
+		return elements;
+	}
+
+	
 }
