@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public interface IStack <T extends Comparable<T>> {
 
 	
@@ -12,4 +14,6 @@ public interface IStack <T extends Comparable<T>> {
 	public T pop();
 	
 	public int size();
+	
+	public List<T> getElementsList();
 }

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public interface IPriorityQueue<T extends Comparable<T>> {
 	
 	void insert(T newElement);
@@ -9,4 +11,6 @@ public interface IPriorityQueue<T extends Comparable<T>> {
 	T extractMax();
 	
 	void IncreaseKey(int i, T key);
+	
+	public List<T> getList();
 }

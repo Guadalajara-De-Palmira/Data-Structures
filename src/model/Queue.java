@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Queue<T extends Comparable<T>> implements IQueue<T> {
 
 	private Node first;
@@ -70,6 +73,18 @@ public class Queue<T extends Comparable<T>> implements IQueue<T> {
 	@Override
 	public int size() {
 		return size;
+	}
+	
+	public List<T> getElementsList(){
+		List<T> list = new ArrayList<T>();
+		Node current = first;
+		
+		while(current!=null) {
+			list.add((T) current.getValue());
+			current = current.getNext();
+		}
+		
+		return list;
 	}
 
 }

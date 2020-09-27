@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public interface IQueue<T extends Comparable<T>> {
 	
 	public void enqueue(T value);
@@ -11,4 +13,6 @@ public interface IQueue<T extends Comparable<T>> {
 	public T dequeue();
 
 	public int size();
+	
+	public List<T> getElementsList();
 }

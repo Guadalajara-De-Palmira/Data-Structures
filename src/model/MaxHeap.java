@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T>{
 
 	private Component[] elements;
@@ -111,4 +114,16 @@ public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T>{
 		return heapSize;
 	}
 
+	@Override
+	public List<T> getList() {
+		List<T> list = new ArrayList<T>();
+		
+		for(int i=0;i<heapSize;i++) {
+			list.add((T)elements[i].getElement());
+		}
+		
+		return list;
+	}
+
+	
 }

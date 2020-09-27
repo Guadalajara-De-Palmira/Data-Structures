@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class Stack <T extends Comparable<T>> implements IStack<T>{
 	
 	private IQueue<T> queue;
@@ -52,6 +54,11 @@ public class Stack <T extends Comparable<T>> implements IStack<T>{
 	@Override
 	public int size() {
 		return queue.size();
+	}
+
+	@Override
+	public List<T> getElementsList() {
+		return queue.getElementsList();
 	}
 	
 	

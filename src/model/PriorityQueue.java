@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class PriorityQueue<T extends Comparable<T>> implements IPriorityQueue<T>{	
 	
 	private MaxHeap elements;
@@ -20,12 +22,17 @@ public class PriorityQueue<T extends Comparable<T>> implements IPriorityQueue<T>
 	}
 
 	@Override
-	public T extractMax() throws Exception {
+	public T extractMax() {
 		return (T) elements.extract();
 	}
 
 	@Override
 	public void IncreaseKey(int i, T key) {
 		elements.increaseKey(i, key);
+	}
+
+	@Override
+	public List<T> getList() {
+		return elements.getList();
 	}
 }
