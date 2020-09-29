@@ -1,4 +1,4 @@
-package model;
+package structures;
 
 import customStructureExceptions.FullStructureException;
 import customStructureExceptions.NotFoundException;
