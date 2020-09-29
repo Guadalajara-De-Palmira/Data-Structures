@@ -3,6 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import customStructureExceptions.EmptyStructureException;
+import customStructureExceptions.KeyDifferenceException;
+
 public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T>{
 
 	private Component[] elements;
@@ -56,9 +59,9 @@ public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T>{
 	}
 
 	@Override
-	public T extract() {
+	public T extract() throws EmptyStructureException {
 		if(heapSize<1) {
-			//tirar una excepcion
+			throw new EmptyStructureException("Cannot extract; the heap is empty");
 		}
 		Component max = elements[1];
 		elements[1] = elements[heapSize];
@@ -71,7 +74,6 @@ public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T>{
 
 	@Override
 	public T returnMaximum() {
-		//buildMaxHeap();
 		return (T)elements[1].getElement();
 	}
 
@@ -93,9 +95,9 @@ public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T>{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void increaseKey(int i, T key) {
+	public void increaseKey(int i, T key) throws KeyDifferenceException {
 		if(key.compareTo((T)elements[i].getElement())<0) {
-			//error, la nueva llave es menor que la actual
+			throw new KeyDifferenceException("Cannot increase key; the new key is minor than the actual key.");
 		}
 		
 		elements[i] = new Component(key);

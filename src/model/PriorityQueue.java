@@ -2,6 +2,9 @@ package model;
 
 import java.util.List;
 
+import customStructureExceptions.EmptyStructureException;
+import customStructureExceptions.KeyDifferenceException;
+
 public class PriorityQueue<T extends Comparable<T>> implements IPriorityQueue<T>{	
 	
 	private MaxHeap elements;
@@ -22,12 +25,12 @@ public class PriorityQueue<T extends Comparable<T>> implements IPriorityQueue<T>
 	}
 
 	@Override
-	public T extractMax() {
+	public T extractMax() throws EmptyStructureException {
 		return (T) elements.extract();
 	}
 
 	@Override
-	public void IncreaseKey(int i, T key) {
+	public void IncreaseKey(int i, T key) throws KeyDifferenceException {
 		elements.increaseKey(i, key);
 	}
 
