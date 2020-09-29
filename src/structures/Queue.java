@@ -44,17 +44,23 @@ public class Queue<T extends Comparable<T>> implements IQueue<T> {
 
 
 	@Override
-	public T front() {
+	public T front() {		
+		T front = null;
 		
-		return (T) first.getValue();
+		if (first != null) {
+			front = (T) first.getValue();
+		}
+		return front;	
 	}
 
 
 	@Override
 	public T dequeue() {
-		T eliminated = (T) first.getValue();
+
+		T eliminated = null;
 		
-		if(first!=null) {
+		if(first != null) {
+			eliminated = (T) first.getValue();
 			if(first==last) {
 				first = null;
 				last = null;
@@ -63,7 +69,7 @@ public class Queue<T extends Comparable<T>> implements IQueue<T> {
 				first.setPrevious(null);
 			}
 		}
-		if(eliminated!=null) {
+		if(eliminated != null) {
 			size--;
 		}
 		return eliminated;
