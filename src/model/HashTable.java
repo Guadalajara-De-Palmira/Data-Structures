@@ -1,5 +1,8 @@
 package model;
 
+import customStructureExceptions.FullStructureException;
+import customStructureExceptions.NotFoundException;
+
 public class HashTable<K,E> implements IHashTable<K, E> {
 
 	private Element<K,E>[] elements;
@@ -12,7 +15,7 @@ public class HashTable<K,E> implements IHashTable<K, E> {
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void tableInsert(E element) {
+	public void tableInsert(E element) throws FullStructureException {
 		boolean inserted = false;
 		
 		for(int i=0; i<elements.length && !inserted;i++) {
@@ -30,13 +33,13 @@ public class HashTable<K,E> implements IHashTable<K, E> {
 			}
 		}
 		if(!inserted) {
-			//tiene que tirar una excepcion de que la tabla esta llena
+			throw new FullStructureException("The hash table is full.");
 		}
 		length++;
 	}
 
 	@Override
-	public E tableRetrieve(K key) {
+	public E tableRetrieve(K key) throws NotFoundException {
 		boolean found = false;
 		Element element = null;
 		
@@ -44,7 +47,7 @@ public class HashTable<K,E> implements IHashTable<K, E> {
 			int index = (this.hashFunction(key.hashCode())+i)%elements.length;
 			
 			if(elements[index]==null) {
-				//tira excepcion de que no se encontro el elemento
+				throw new NotFoundException("The element was not found in the hash table");
 				
 			}else if((int)elements[index].getKey()==key.hashCode()) {
 				found = true;
@@ -54,13 +57,13 @@ public class HashTable<K,E> implements IHashTable<K, E> {
 		}
 		
 		if(!found) {
-			//tira excepcion de que no se encontro el elemento a borrar
+			throw new NotFoundException("The element was not found in the hash table");
 		}
 		return (E) element.getElement();
 	}
 
 	@Override
-	public E tableDelete(K key) {
+	public E tableDelete(K key) throws NotFoundException {
 		boolean found = false;
 		Element element = null;
 		
@@ -68,7 +71,7 @@ public class HashTable<K,E> implements IHashTable<K, E> {
 			int index = (this.hashFunction(key.hashCode())+i)%elements.length;
 			
 			if(elements[index]==null) {
-				//tira excepcion de que no se encontro el elemento a borrar
+				throw new NotFoundException("The element was not found in the hash table");
 				
 			}else if((int)elements[index].getKey()==key.hashCode()) {
 				found = true;
@@ -80,7 +83,7 @@ public class HashTable<K,E> implements IHashTable<K, E> {
 		}
 		
 		if(!found) {
-			//tira excepcion de que no se encontro el elemento a borrar
+			throw new NotFoundException("The element was not found in the hash table");
 		}
 
 		return (E) element.getElement();

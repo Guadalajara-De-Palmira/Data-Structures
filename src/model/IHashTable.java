@@ -2,13 +2,16 @@ package model;
 
 import java.util.List;
 
+import customStructureExceptions.FullStructureException;
+import customStructureExceptions.NotFoundException;
+
 public interface IHashTable<K,E> {
 	
-	public void tableInsert(E element);
+	public void tableInsert(E element) throws FullStructureException;
 	
-	public E tableRetrieve(K key);
+	public E tableRetrieve(K key) throws NotFoundException;
 	
-	public E tableDelete(K key);
+	public E tableDelete(K key) throws NotFoundException;
 	
 	public boolean isEmpty();
 	
