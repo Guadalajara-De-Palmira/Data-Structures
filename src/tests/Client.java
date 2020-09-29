@@ -55,4 +55,9 @@ public class Client implements Comparable<Client>{
 		}
 		return result;
 	}
+	
+	@Override
+	public int hashCode() {
+		return id;
+	}
 }

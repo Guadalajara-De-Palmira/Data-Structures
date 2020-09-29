@@ -18,5 +18,6 @@ public interface IHashTable<K,E> {
 	public int hashFunction(int key);
 	
 	public Element<K,E>[] getTable();
+
 	
 }

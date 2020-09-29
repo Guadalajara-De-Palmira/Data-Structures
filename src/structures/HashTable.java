@@ -44,12 +44,13 @@ public class HashTable<K,E> implements IHashTable<K, E> {
 		Element element = null;
 		
 		for(int i=0; i<elements.length && !found;i++) {
-			int index = (this.hashFunction(key.hashCode())+i)%elements.length;
+			
+			int index = (this.hashFunction((int)key)+i)%elements.length;
 			
 			if(elements[index]==null) {
 				throw new NotFoundException("The element was not found in the hash table");
 				
-			}else if((int)elements[index].getKey()==key.hashCode()) {
+			}else if((int)elements[index].getKey()==(int)key) {
 				found = true;
 				element = elements[index];
 
@@ -68,12 +69,12 @@ public class HashTable<K,E> implements IHashTable<K, E> {
 		Element element = null;
 		
 		for(int i=0; i<elements.length && !found;i++) {
-			int index = (this.hashFunction(key.hashCode())+i)%elements.length;
-			
+			int index =  (this.hashFunction((int)key)+i)%elements.length;
+
 			if(elements[index]==null) {
 				throw new NotFoundException("The element was not found in the hash table");
 				
-			}else if((int)elements[index].getKey()==key.hashCode()) {
+			}else if((int)elements[index].getKey()==(int)key) {
 				found = true;
 				element = elements[index];
 				elements[index] = new Element(-1,null);
