@@ -35,7 +35,7 @@ public class Stack <T extends Comparable<T>> implements IStack<T>{
 			queue.enqueue(queueTwo.dequeue());
 		}
 		
-		return top;
+		return top; 
 	}
 
 	@Override
@@ -47,6 +47,9 @@ public class Stack <T extends Comparable<T>> implements IStack<T>{
 		}
 		
 		eliminated = queue.dequeue();
+		while(queueTwo.size()>0) {
+			queue.enqueue(queueTwo.dequeue());
+		}
 		
 		return eliminated;
 	}
