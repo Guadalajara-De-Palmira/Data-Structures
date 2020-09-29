@@ -15,7 +15,7 @@ public class PriorityQueue<T extends Comparable<T>> implements IPriorityQueue<T>
 	}
 
 	@Override
-	public void insert(T newElement) {
+	public void insert(T newElement) throws KeyDifferenceException {
 		elements.insert(newElement);
 	}
 

@@ -11,7 +11,7 @@ public interface IMaxHeap<T extends Comparable<T>>{
 	
 	public void buildMaxHeap();
 	
-	public void insert(T element);
+	public void insert(T element) throws KeyDifferenceException;
 	
 	public T extract() throws EmptyStructureException;
 	

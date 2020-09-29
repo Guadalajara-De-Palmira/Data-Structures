@@ -7,7 +7,7 @@ import customStructureExceptions.KeyDifferenceException;
 
 public interface IPriorityQueue<T extends Comparable<T>> {
 	
-	void insert(T newElement);
+	void insert(T newElement) throws KeyDifferenceException;
 	
 	T maximum();
 	

@@ -52,7 +52,7 @@ public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T>{
 	}
 
 	@Override
-	public void insert(T element) {
+	public void insert(T element) throws KeyDifferenceException {
 		heapSize++;
 		increaseKey(heapSize, element);
 		
