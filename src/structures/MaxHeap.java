@@ -22,15 +22,23 @@ public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T>{
 		int l = left(i);
 		int r = right(i);
 		int largest = i;
-		int comparation = elements[l].getElement().compareTo(elements[i].getElement());
 		
-		if(l<heapSize && comparation>0) {
+		int comparation = 0;
+		
+		if (elements[l] != null && elements[i] != null) {
+			comparation = elements[l].getElement().compareTo(elements[i].getElement());
+		}
+		
+		if(l < heapSize && comparation > 0) {
 			largest = l;
 			
 		}
-		comparation = elements[r].getElement().compareTo(elements[largest].getElement());
 		
-		if(l<heapSize && comparation>0) {
+		if (elements[r] != null && elements[i] != null) {
+			comparation = elements[r].getElement().compareTo(elements[largest].getElement());
+		}
+		
+		if(r < heapSize && comparation > 0) {
 			largest = r;
 		}
 		if(largest != i) {
@@ -40,7 +48,6 @@ public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T>{
 			aux = null;
 			heapify(largest);
 		}
-		
 	}
 
 	@Override
@@ -53,9 +60,8 @@ public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T>{
 
 	@Override
 	public void insert(T element) throws KeyDifferenceException {
-		heapSize++;
 		increaseKey(heapSize, element);
-		
+		heapSize++;
 	}
 
 	@Override
@@ -63,19 +69,27 @@ public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T>{
 		if(heapSize<1) {
 			throw new EmptyStructureException("Cannot extract; the heap is empty");
 		}
-		Component max = elements[1];
-		elements[1] = elements[heapSize];
-		elements[heapSize] = null;
+		
+		Component max = elements[0];
+		elements[0] = elements[heapSize - 1];
+		elements[heapSize - 1] = null;
 		heapSize--;
-		heapify(1);
+		heapify(0);
 		
 		return (T)max.getElement();
 	}
 
-	@Override
+	@Override		
 	public T returnMaximum() {
-		return (T)elements[1].getElement();
+		T toReturn = null;
+		
+		if (elements[0] != null) {
+			toReturn = (T)elements[0].getElement();
+		}
+		
+		return toReturn;
 	}
+	
 
 	@Override
 	public int parent(int i) {
@@ -84,26 +98,29 @@ public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T>{
 
 	@Override
 	public int left(int i) {
-		return 2*i;
+		return (2*i) + 1;
 	}
 
 	@Override
 	public int right(int i) {
 		// TODO Auto-generated method stub
-		return (2*i)+1;
+		return (2*i) + 2;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void increaseKey(int i, T key) throws KeyDifferenceException {
-		if(key.compareTo((T)elements[i].getElement())<0) {
+	public void increaseKey(int i, T key) throws KeyDifferenceException {	
+		if(elements[i] != null && key.compareTo((T)elements[i].getElement()) < 0) {
 			throw new KeyDifferenceException("Cannot increase key; the new key is minor than the actual key.");
 		}
 		
+		int comparation = 0;
 		elements[i] = new Component(key);
-		int comparation = elements[parent(i)].getElement().compareTo(elements[i].getElement());
 		
-		while( i>i && comparation<0) {
+		if (i > 0) {
+			comparation = elements[parent(i)].getElement().compareTo(elements[i].getElement());
+		}
+		while(i > 0 && comparation < 0) {
 			Component aux = elements[parent(i)];
 			elements[parent(i)] = elements[i];
 			elements[i] = aux;
@@ -121,7 +138,9 @@ public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T>{
 		List<T> list = new ArrayList<T>();
 		
 		for(int i=0;i<heapSize;i++) {
-			list.add((T)elements[i].getElement());
+			if (elements[i] != null) {
+				list.add((T)elements[i].getElement());
+			}
 		}
 		
 		return list;
